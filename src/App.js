@@ -18,7 +18,10 @@ function App() {
         >
           Learn React
         </a>
+
       </header>
+      <div className="cssCompObject">
+      </div>
     </div>
   );
 }

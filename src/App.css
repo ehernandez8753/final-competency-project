@@ -18,6 +18,14 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.cssCompObject + p{
+  background-color: #61dafb;
+  width: 100px;
+  height: 40px;
+  position: relative;
+  top: 0;
+  left: 100px;
+}
 
 .App-link {
   color: #61dafb;
