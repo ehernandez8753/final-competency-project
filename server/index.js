@@ -4,6 +4,7 @@ const express = require("express");
 const massive = require("massive");
 const session = require("express-session");
 const app = express();
+const userController = require("./controllers/userController.js");
 
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
@@ -18,3 +19,10 @@ app.use(session({
 }));
 
 massive(CONNECTION_STRING).then(db => app.set("db", db));
+
+//User Endpoints
+
+app.get("/api/getUser", userController.getUser);
+app.post("/api/login", userController.login);
+app.post("/api/signup", userController.signup);
+app.delete("/api/logout", userController.logout);
