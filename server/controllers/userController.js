@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 module.exports = {
-    login: async function(req, res){
+    login: async function(req, res, next){
         let {username, password} = req.body;
         const db = req.app.get("db");
         //Check if user exists
@@ -19,8 +19,10 @@ module.exports = {
                 loggedIn: true
             }
             res.send(req.session.user);
+            
         }else{
-            res.status(401).send("Username or Password is Incorrect");
+            next();
+            //res.status(401).send("Username or Password is Incorrect");
         }
     },
     signup: async function(req, res){

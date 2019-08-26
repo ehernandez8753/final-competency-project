@@ -5,10 +5,12 @@ const massive = require("massive");
 const session = require("express-session");
 const app = express();
 const userController = require("./controllers/userController.js");
+const loginMiddleware = require("./middleware/loginMiddleware.js");
 
 const {SERVER_PORT, SESSION_SECRET, CONNECTION_STRING} = process.env;
 
 app.use(express.json());
+app.use(express.static(__dirname + "/static/"));
 app.listen(SERVER_PORT, () => console.log("Server Listening on Port", SERVER_PORT));
 
 app.use(session({
@@ -23,6 +25,6 @@ massive(CONNECTION_STRING).then(db => app.set("db", db));
 //User Endpoints
 
 app.get("/api/getUser", userController.getUser);
-app.post("/api/login", userController.login);
+app.post("/api/login", userController.login, loginMiddleware.logPostLogin);
 app.post("/api/signup", userController.signup);
 app.delete("/api/logout", userController.logout);
